@@ -1,0 +1,90 @@
+Harika. SigCloud, önceki donanım odaklı ürünlerin (SigMote ve DataMote) tamamlayıcısı olarak "Orkestrasyon ve Analiz" katmanıdır.
+
+Arama sonuçlarından edindiğim bilgilere göre SigCloud; AVAS (Akustik/Titreşim), AQNS (Hava Kalitesi/Gürültü) ve Locomopt (Mikromobilite) gibi farklı dikey çözümlerin verilerini toplayan, görselleştiren ve yöneten merkezi platformdur.
+
+Aşağıda SigCloud için Sanity CMS yapısına uygun, kapsamlı İngilizce içerik planı, görsel önerileri ve bunları ürettirecek "Master Prompt" yer almaktadır.
+
+Part 1: Sanity CMS Content Structure (English)
+1. SEO & Metadata
+Meta Title: SigCloud | Scalable IoT Management & Analytics Platform
+
+Meta Description: The central nervous system for your sensor networks. SigCloud provides real-time data visualization, device management, and cloud-side AI integration for smart city and industrial applications.
+
+OG Image: [High-fidelity screenshot of the SigCloud Dashboard showing maps and real-time graphs on a dark UI]
+
+2. Module: Hero Section (The Command Center)
+Headline: The Command Center for Your Digital Reality
+
+Sub-headline: Securely ingest, analyze, and visualize data from thousands of SigMote and DataMote devices. Turn massive sensor streams into actionable intelligence.
+
+Primary Button: Platform Features
+
+Secondary Button: Login
+
+Visual Strategy: An isometric illustration showing data streams flowing from satellites and ground sensors into a central "Cloud" structure, which then distributes insights to tablets and screens.
+
+3. Module: Value Proposition (3-Column Grid)
+Item 1 (Management):
+
+Icon: Settings / Sliders
+
+Title: Total Device Management
+
+Body: Monitor the health, battery status, and connectivity of your entire fleet. Push Over-the-Air (OTA) firmware updates to SigMote and DataMote devices with a single click.
+
+Item 2 (Analytics):
+
+Icon: Chart / Analytics
+
+Title: Big Data & AI Ready
+
+Body: Beyond simple logging, SigCloud runs advanced analytics. It integrates seamlessly with SigSAS algorithms to detect anomalies in vibration or acoustic data that require heavy cloud processing.
+
+Item 3 (Flexibility):
+
+Icon: Cloud / API
+
+Title: API-First Architecture
+
+Body: Built for interoperability. Easily export data to third-party ERPs, BI tools, or custom applications via our robust RESTful APIs and WebSocket streams.
+
+4. Module: Solutions & Integrations (Tabs/Carousel)
+Here we highlight the specific verticals mentioned in Signalton's portfolio.
+
+Tab 1: AVAS (Industrial)
+
+Headline: Preventive Maintenance Dashboard
+
+Body: Visualize spectral analysis from SigMote. Track vibration trends over months to predict machine failure before it halts production.
+
+Tab 2: Locomopt (Mobility)
+
+Headline: Real-Time Fleet Tracking
+
+Body: Live map visualization for vehicles and scooters equipped with DataMote. Define geofences and receive instant alerts for violations.
+
+Tab 3: AQNS (Smart City)
+
+Headline: Environmental Heatmaps
+
+Body: Monitor air quality and noise pollution across the city. Generate compliance reports and identify pollution hotspots instantly.
+
+5. Module: Technical Reliability (Split Layout)
+Headline: Enterprise-Grade Reliability
+
+Body: Your data is critical. SigCloud is architected for high availability and security.
+
+Data Security: End-to-end encryption (TLS 1.3) from device to dashboard.
+
+Scalability: Horizontal scaling architecture designed to handle thousands of concurrent connections (MQTT/HTTP).
+
+Storage: Hot storage for instant access and cold storage for long-term compliance logging.
+
+Visual Strategy: A diagram showing the security layers: Device -> Encrypted Tunnel -> Load Balancer -> Database -> User Interface.
+
+6. Module: Footer CTA
+Headline: Unify Your IoT Network
+
+Body: Schedule a demo to see how SigCloud can streamline your operations.
+
+Button: Schedule Demo

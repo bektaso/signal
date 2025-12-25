@@ -1,0 +1,80 @@
+1. SEO & Metadata (Hidden Fields)
+Meta Title: SigMote | Edge AI & Signal Processing Platform
+
+Meta Description: An advanced edge computing platform featuring integrated MEMS microphones and accelerometers. Designed for real-time DSP, AI inference, and industrial acoustic analysis.
+
+OG Image: [Studio shot of SigMote PCB with focus on MEMS array]
+
+2. Module: Hero Section (Impact)
+Headline: Intelligence at the Edge
+
+Sub-headline: Process audio, vibration, and video data in real-time. SigMote is the all-in-one hardware platform for Edge AI and advanced Digital Signal Processing.
+
+Primary Button: Download Datasheet (/downloads/sigmote-datasheet.pdf)
+
+Secondary Button: Request Demo
+
+Visual Strategy: A high-tech render of the board floating in a 3D space, with "sound wave" or "digital signal" graphics emanating from the microphone sensors.
+
+3. Module: Key Features (3-Column Grid)
+Item 1 (Speed):
+
+Icon: Lightning / Speedometer
+
+Title: Zero Latency
+
+Body: Don't wait for the cloud. SigMote processes critical sensor data locally, enabling millisecond-level decision-making for industrial automation.
+
+Item 2 (Privacy):
+
+Icon: Shield / Lock
+
+Title: Privacy First
+
+Body: Analyze sensitive audio and video on-device. Only metadata and insights are transmitted, ensuring full GDPR/KVKK compliance.
+
+Item 3 (Efficiency):
+
+Icon: Server / Database
+
+Title: Bandwidth Efficient
+
+Body: Reduce data transmission costs by up to 90%. Transform gigabytes of raw sensor data into kilobytes of actionable insights before transmission.
+
+4. Module: Technical Specifications (Split Layout)
+Headline: Engineered for Sensing
+
+Body Text: SigMote is not just a gateway; it is a sensing powerhouse. Built for Wireless Sensor and Actuator Networks (WSAN), it eliminates the need for external peripherals.
+
+Hardware Highlights:
+
+Acoustic Array: 2x Analog & 2x Digital MEMS Microphones for beamforming and source localization.
+
+Vibration Sensing: Integrated 3-axis MEMS Accelerometer for structural health monitoring.
+
+Visual Processing: On-board Video Decoder for composite/component inputs, ready for Computer Vision.
+
+Robust Connectivity: Ethernet, USB, and expansion slots for cellular integration.
+
+Visual Strategy: An "Annotated Board" image. Top-down photo of the PCB with lines pointing to specific chips (DSP, MEMS Mics, Accelerometer) labeled clearly.
+
+5. Module: Software Ecosystem (Full Width Banner)
+Headline: Seamless Integration with SigSAS
+
+Body: Unlock the full potential of your hardware. SigMote is natively optimized for Signalton Signal Analysis Software (SigSAS), allowing you to deploy complex spectral analysis and AI models without writing low-level code.
+
+Visual Strategy: A split-screen visual: Left side shows the hardware, right side shows the SigSAS software dashboard, connected by a glowing line.
+
+6. Module: Use Cases (Card Carousel)
+Card 1: Industrial Predictive Maintenance (Motor fault detection via vibration).
+
+Card 2: Acoustic Event Detection (Gunshot, glass break, or cry detection for security).
+
+Card 3: Smart City Monitoring (Noise pollution analysis and traffic counting).
+
+7. Module: Footer CTA
+Headline: Ready to Deploy Edge AI?
+
+Body: Contact our engineering team for technical documentation and bulk pricing.
+
+Button: Contact Us

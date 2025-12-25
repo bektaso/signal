@@ -1,65 +1,90 @@
-import Image from "next/image";
+import { client } from '@/lib/sanity/client'
+import { homePageQuery } from '@/lib/sanity/queries'
+import BlockRenderer from '@/components/blocks/BlockRenderer'
+import HeroWrapper from '@/components/hero/HeroWrapper'
+import FeaturesBlock from '@/components/blocks/FeaturesBlock'
+import ProductsBlock from '@/components/blocks/ProductsBlock'
+import ServicesBlock from '@/components/blocks/ServicesBlock'
+import ContactBlock from '@/components/blocks/ContactBlock'
 
-export default function Home() {
+// Default content for demo/fallback
+const defaultBlocks = [
+  {
+    _key: 'hero',
+    _type: 'heroBlock',
+    headline: 'Invisible Intelligence',
+    subheadline: 'Advanced signal processing, AI, and digital systems for challenging real-world problems.',
+    ctaPrimary: { label: 'Explore Solutions', href: '#products' },
+    ctaSecondary: { label: 'Contact Us', href: '#contact' },
+  },
+  {
+    _key: 'features',
+    _type: 'featuresBlock',
+    title: 'About Signalton',
+    subtitle: 'Bringing together decades of academic and industry expertise in signal processing and AI.',
+    features: [
+      { _key: 'f1', icon: 'cpu', title: 'IoT & Edge Computing', description: 'Cutting-edge sensor networks and edge processing solutions.' },
+      { _key: 'f2', icon: 'brain', title: 'AI & Machine Learning', description: 'Deep learning and pattern recognition for intelligent systems.' },
+      { _key: 'f3', icon: 'eye', title: 'Computer Vision', description: 'Image and video analysis for industrial and smart city applications.' },
+      { _key: 'f4', icon: 'radio', title: 'Signal Processing', description: 'Advanced DSP, spectral analysis, and acoustic signal processing.' },
+      { _key: 'f5', icon: 'database', title: 'Data Fusion', description: 'Intelligent data integration and decision support systems.' },
+      { _key: 'f6', icon: 'shield', title: 'Disaster Resilience', description: 'Smart monitoring systems for structural health and safety.' },
+    ],
+  },
+  {
+    _key: 'products',
+    _type: 'productsBlock',
+    title: 'Products & Solutions',
+    subtitle: 'Versatile digital systems and end-to-end intelligent solutions.',
+    products: [
+      { _id: 'p1', title: 'SigMote', slug: { current: 'sigmote' }, tagline: 'DSP-CV-AI Edge Computing Platform', icon: 'cpu', category: 'hardware' },
+      { _id: 'p2', title: 'DataMote', slug: { current: 'datamote' }, tagline: 'IoT Sensor/Actuator Platform', icon: 'radio', category: 'hardware' },
+      { _id: 'p3', title: 'SigCloud', slug: { current: 'sigcloud' }, tagline: 'IoT/Edge Data Platform', icon: 'cloud', category: 'platform' },
+      { _id: 'p4', title: 'Locomopt', slug: { current: 'locomopt' }, tagline: 'IoT/Edge GIS Data Platform', icon: 'map', category: 'platform' },
+    ],
+  },
+  {
+    _key: 'services',
+    _type: 'servicesBlock',
+    title: 'Our Services',
+    subtitle: 'Outstanding expert team with exceptional experience.',
+    services: [
+      { _key: 's1', title: 'R&D Consulting', description: 'Outsourced research, collaboration, or consulting towards scalable joint products.' },
+      { _key: 's2', title: 'Signal Processing', description: 'Spectral analysis, acoustic/audio/vibration analysis, array signal processing.' },
+      { _key: 's3', title: 'AI Implementation', description: 'Machine learning, deep learning, pattern recognition, classification systems.' },
+      { _key: 's4', title: 'Electronic Design', description: 'Hardware design and production management for prototyping and volume production.' },
+      { _key: 's5', title: 'Software Development', description: 'Custom software solutions and embedded programming.' },
+      { _key: 's6', title: 'Startup Consultancy', description: 'Idea preparation, project development, funding and rapid-growth support.' },
+    ],
+  },
+  {
+    _key: 'contact',
+    _type: 'contactBlock',
+    title: 'Contact Us',
+    subtitle: 'Get in touch for any inquiry about our products and services.',
+    email: 'info@signalton.com.tr',
+    phone: '+90-533-348-3873',
+    address: 'Ankara, Turkey',
+    linkedIn: 'https://www.linkedin.com/company/signalton',
+  },
+]
+
+export default async function HomePage() {
+  let pageData: { blocks?: Array<{ _key: string; _type: string;[key: string]: unknown }> } | null = null
+
+  try {
+    pageData = await client.fetch(homePageQuery)
+  } catch (error) {
+    console.error('Failed to fetch home page:', error)
+  }
+
+  const blocks = pageData?.blocks || defaultBlocks
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    <>
+      {blocks.map((block) => (
+        <BlockRenderer key={block._key} block={block} />
+      ))}
+    </>
+  )
 }

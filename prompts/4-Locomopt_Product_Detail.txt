@@ -1,0 +1,81 @@
+Locomopt, Signalton'un "Akıllı Mobilite" ve "Filo Yönetimi" dikeyindeki çözümüdür. Arama sonuçlarından elde ettiğimiz bilgilere göre; bu ürün sadece basit bir GPS takibi değil, "IoT/Edge GIS Data Platform" olarak tanımlanan, araç sağlığı (lastik aşınması, düşme tespiti) ve sürüş güvenliği (DMS) odaklı gelişmiş bir platformdur.
+
+Aşağıda Locomopt için Sanity CMS yapısına uygun, ürünün hem yazılım (GIS Platformu) hem de donanım (DataMote entegrasyonu) kaslarını gösteren içerik planı ve "Master Prompt" yer almaktadır.
+
+Part 1: Sanity CMS Content Structure (English)
+1. SEO & Metadata
+Meta Title: Locomopt | Intelligent Fleet Orchestration & GIS Platform
+
+Meta Description: An advanced IoT/Edge GIS platform for micromobility and fleet management. Features real-time tracking, remote locking, fall detection, and predictive tire wear analysis.
+
+OG Image: [Dashboard view of a city map with scooter clusters and battery health indicators]
+
+2. Module: Hero Section (The Promise)
+Headline: Redefining Urban Mobility
+
+Sub-headline: The complete IoT/Edge GIS Data Platform for micromobility operators and fleet managers. Orchestrate your vehicles with precision, from location tracking to predictive maintenance.
+
+Primary Button: Request Platform Demo
+
+Secondary Button: Explore Hardware
+
+Visual Strategy: A dynamic, high-angle visual of a city street with "digital twins" of scooters and bikes moving, connected by data lines to a floating "Locomopt" dashboard.
+
+3. Module: Key Capabilities (Grid Layout)
+Item 1 (GIS & Tracking):
+
+Icon: Map / Pin
+
+Title: Precision GIS Tracking
+
+Body: Monitor your fleet on a live GIS (Geographic Information System) layer. Get sub-meter accuracy on vehicle location, speed, and heading.
+
+Item 2 (Safety & Security):
+
+Icon: Shield / Alert
+
+Title: Fall & Crash Detection
+
+Body: Detect accidents instantly. Locomopt processes accelerometer data at the edge (via DataMote) to identify falls or impacts and alert operation teams immediately.
+
+Item 3 (Control):
+
+Icon: Lock / Unlock
+
+Title: Remote Command
+
+Body: Take full control. Remotely lock/unlock vehicles, immobilize stolen assets, and manage battery power usage—all from the cloud dashboard.
+
+4. Module: The "Edge" Advantage (Spotlight Feature)
+Headline: Predictive Maintenance at the Edge
+
+Body: Most platforms only tell you where the vehicle is. Locomopt tells you how it is. Using advanced signal analysis, Locomopt can detect tyre wear and structural anomalies before they cause a breakdown. Reduce operational costs by servicing vehicles only when needed, not on a blind schedule.
+
+Visual Strategy: A close-up schematic of a tire or vehicle wheel with a "Health Bar" overlay, indicating 85% health, demonstrating the predictive analysis capability.
+
+5. Module: Ecosystem Integration (How it works)
+Headline: Powered by DataMote
+
+Body: Locomopt is the brain; DataMote is the heart. The platform natively integrates with Signalton's DataMote telemetry unit to extract CAN-bus data, battery levels, and sensor diagnostics without complex configuration.
+
+Visual Strategy: An image showing the DataMote hardware board connecting to a scooter's internal wiring, with an arrow pointing to the Locomopt software screen.
+
+6. Module: Use Cases (Tabs)
+Tab 1: Micromobility Sharing
+
+Scooters & E-bikes. Battery swapping management, geofencing enforcement, and user billing integration.
+
+Tab 2: Corporate Fleets
+
+Light commercial vehicles. Driver Monitoring Systems (DMS) to detect fatigue or aggressive driving behaviors.
+
+Tab 3: Smart Logistics
+
+Real-time cargo tracking and cold-chain monitoring.
+
+7. Module: Footer CTA
+Headline: Optimize Your Fleet Today
+
+Body: Join the operators managing thousands of assets with Locomopt.
+
+Button: Talk to an Expert

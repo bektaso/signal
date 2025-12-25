@@ -1,0 +1,119 @@
+1. SEO & Metadata Fields
+Invisible fields for search engines.
+
+Meta Title: DataMote | Industrial IoT Gateway & Telemetry Unit
+
+Meta Description: A ruggedized IoT data collector featuring 4G/LTE, GNSS positioning, and CAN Bus connectivity. Designed for fleet management, asset tracking, and remote telemetry.
+
+OG Image: [Render of DataMote board with antenna connectors visible]
+
+2. Module: Hero Section (Above the Fold)
+Focus: Connectivity and Reliability.
+
+Headline: Connect Your Physical World to the Cloud
+
+Sub-headline: An industrial-grade IoT telemetry module designed for reliable data collection, precise geopositioning, and secure cellular transmission. The backbone of your digital twin.
+
+Primary CTA Button Label: Download Datasheet
+
+Primary CTA Link: /downloads/datamote-datasheet.pdf
+
+Secondary CTA Button Label: Contact Sales
+
+Image Suggestion: A high-angle shot of the DataMote board, specifically highlighting the SIM Card slot and Antenna connectors (LTE/GPS) to emphasize connectivity.
+
+3. Module: Value Proposition (3-Column Grid)
+Why choose DataMote? Focus on "Remote" and "Tracking".
+
+Item 1:
+
+Icon: Signal / Antenna
+
+Title: Always Connected
+
+Body: Built-in 4G/LTE and GSM/GPRS fallback ensure your data reaches the cloud from anywhere. Supports MQTT/S and HTTP/S protocols for seamless integration with AWS, Azure, or custom backends.
+
+Item 2:
+
+Icon: Map Pin / Location
+
+Title: Precision Tracking
+
+Body: Integrated GNSS receiver (GPS, GLONASS, BeiDou) provides location accuracy under 2 meters. Perfect for tracking mobile assets, vehicle fleets, or micromobility solutions.
+
+Item 3:
+
+Icon: Database / Storage
+
+Title: Blackbox Logging
+
+Body: With 1Gb of onboard Flash memory, DataMote acts as a reliable data logger. Even if the network fails, your data is stored locally and synced when connectivity is restored.
+
+4. Module: Technical Deep Dive (Split Layout)
+Detailed specs for the engineers.
+
+Section Title: Rugged Telemetry & Control
+
+Rich Text Body: DataMote is the ultimate bridge for "Cloud-Side AI." It collects high-fidelity sensor data and transmits it securely for central processing.
+
+Key Hardware Specifications:
+
+Core Power: ARM Cortex-M4F Processor (80 MHz) optimized for low-power operation.
+
+Industrial Interfaces: Native support for CAN 2.0 A/B, making it ideal for automotive and machinery data extraction. Includes USB 2.0, I2C, SPI, and UART.
+
+Wireless Versatility: Beyond cellular, it features Bluetooth 5.0 and BLE for communicating with nearby sensors.
+
+Motion Sensing: On-board 3-axis accelerometer for detecting impacts, vibration, or movement initiation.
+
+OS: Runs on TI-RTOS with POSIX support, ensuring real-time responsiveness.
+
+Image Suggestion: A diagram labeled "DataMote Interfaces".
+
+Arrow pointing to SIM slot: "Global Connectivity"
+
+Arrow pointing to CAN pins: "Vehicle Bus Interface"
+
+Arrow pointing to GPS chip: "GNSS < 2m"
+
+5. Module: Application Areas (Feature List / Cards)
+Where is this used? Focus on Logistics and Mobility.
+
+Card 1: Fleet Management & Telematics
+
+Text: Monitor vehicle health, fuel consumption, and driver behavior in real-time via CAN Bus and GPS integration.
+
+Card 2: Smart Micromobility (Locomopt)
+
+Text: The core unit for scooter and bike-sharing platforms, providing location tracking, locking mechanisms, and usage analytics.
+
+Card 3: Remote Environmental Monitoring
+
+Text: Deploy in remote locations to log weather or structural data and transmit periodically via LTE, independent of local Wi-Fi.
+
+6. Module: Integration (Banner)
+Highlighting the "Cloud-Ready" aspect.
+
+Headline: Cloud Agnostic
+
+Body: Whether you use Signalton's own cloud platform or third-party solutions, DataMote speaks universal languages (MQTT, JSON, TCP/IP). It serves as the reliable "feeder" for your Cloud AI models.
+
+Background Visual: An abstract visualization of data lines flowing from a chip (DataMote) up to a cloud icon.
+
+7. Module: Footer CTA
+Headline: Start Collecting Data Today
+
+Body: Need a custom integration? Our team can help configure DataMote for your specific sensor protocols.
+
+Button Label: Get a Quote
+
+Button Link: /contact
+
+Tasarım ve Görsel İpuçları (DataMote Özelinde)
+Renk Ayrımı: SigMote için daha "Cyber/AI" renkleri (Neon maviler, morlar) kullanıyorsanız, DataMote için daha "Endüstriyel/Güvenilir" renkler (Turuncu, Koyu Gri veya Signalton Yeşili) kullanabilirsiniz.
+
+Anten Vurgusu: Görsellerde board'a takılı antenleri (küçük pigtail kablolar veya SMA konnektörler) göstermek, ürünün "Kablosuz" yeteneğini bilinçaltına işler.
+
+Harita Motifi: Arka planlarda silik harita veya topografya çizgileri kullanmak, ürünün GPS/Takip özelliğine gönderme yapar.
+
+Bu içerik planı, DataMote'u SigMote'un bir alternatifi değil, tamamlayıcısı (Cloud AI vs Edge AI) olarak konumlandırır.

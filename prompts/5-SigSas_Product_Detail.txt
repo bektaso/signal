@@ -1,0 +1,81 @@
+SigSAS (Signalton Signal Analysis Software), Signalton donanımlarının (SigMote) üzerinde koşan "beyin" katmanıdır. Donanımı sadece veri toplayan bir cihazdan, karar veren akıllı bir sisteme dönüştüren algoritma kütüphanesidir.
+
+Bu ürün sayfası, geliştiricilere ve sistem mühendislerine hitap edeceği için dilin teknik ve yetkinlik odaklı olması gerekir. Siglent vb. markaların osiloskop yazılımlarıyla karıştırılmamalı; bu doğrudan Gömülü DSP ve AI Algoritma Paketi olarak konumlandırılmalıdır.
+
+İşte Sanity CMS yapısına uygun içerik planı ve "Master Prompt":
+
+Part 1: Sanity CMS Content Structure (English)
+1. SEO & Metadata
+Meta Title: SigSAS | Advanced Signal Processing & Edge AI Library
+
+Meta Description: A comprehensive suite of real-time DSP, Computer Vision, and AI algorithms optimized for the SigMote platform. Deploy spectral analysis and machine learning models directly to the edge.
+
+OG Image: [Abstract visualization of a raw noisy signal transforming into a clean digital wave via a code block]
+
+2. Module: Hero Section (The Core Intelligence)
+Headline: The Algorithmic Core of Edge Intelligence
+
+Sub-headline: Turn raw sensor data into actionable physics-based insights. SigSAS is a highly optimized library of DSP, Computer Vision, and ML algorithms designed to run natively on SigMote hardware.
+
+Primary Button: View Documentation
+
+Secondary Button: Supported Models
+
+Visual Strategy: A split screen: On the left, a raw, chaotic vibration graph. In the middle, a "SigSAS" glowing chip/icon. On the right, a clear text output saying "Status: Bearing Fault Detected (98% Confidence)".
+
+3. Module: Technical Capabilities (4-Block Grid)
+Item 1: Advanced DSP
+
+Title: Spectral Analysis
+
+Body: Real-time Fast Fourier Transform (FFT), digital filtering, and time-frequency analysis. Perfect for extracting features from vibration and acoustic sensors.
+
+Item 2: Acoustic Intelligence
+
+Title: Audio Processing
+
+Body: Pre-built modules for Beamforming, Direction of Arrival (DoA) estimation, and noise cancellation using SigMote's microphone arrays.
+
+Item 3: Embedded AI
+
+Title: Edge Inference
+
+Body: Run lightweight Machine Learning and Deep Learning models directly on the device. Detect anomalies or classify objects without sending video/audio to the cloud.
+
+Item 4: Vision Ready
+
+Title: Computer Vision
+
+Body: Optimized image processing pipelines for object detection and motion tracking, fully integrated with the on-board video decoders.
+
+4. Module: The Workflow (Step-by-Step)
+Headline: From Code to Deployment
+
+Step 1: Configure. Select your sensors and desired analysis modules (e.g., Vibration FFT + Anomaly Detection).
+
+Step 2: Deploy. Push the SigSAS firmware configuration to your SigMote fleet via OTA (Over-the-Air).
+
+Step 3: Analyze. The algorithms execute on the edge (ARM Cortex/DSP), processing data in milliseconds.
+
+Step 4: Act. Only the results (alerts, metadata) are sent to SigCloud, saving bandwidth and ensuring privacy.
+
+5. Module: Application Verticals (List)
+Smart Industry: Fault detection in rotating machinery using vibration signatures (Predictive Maintenance).
+
+Security: Gunshot detection or glass break analysis using acoustic signatures without recording conversations.
+
+Traffic: Vehicle counting and classification using edge video analytics.
+
+6. Module: Integration Banner
+Headline: Built for SigMote, Connected to SigCloud
+
+Body: SigSAS is the bridge. It runs on the SigMote hardware to create insights, which are then visualized and managed on the SigCloud platform. A unified ecosystem for end-to-end IoT success.
+
+Visual Strategy: A diagram showing: Sensor Data -> SigMote Hardware + SigSAS Algorithms -> Clean Data -> SigCloud Dashboard.
+
+7. Module: Footer CTA
+Headline: Empower Your Edge Devices
+
+Body: See the full list of supported algorithms and benchmarks.
+
+Button: Developer Hub

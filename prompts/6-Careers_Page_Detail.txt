@@ -1,0 +1,80 @@
+Signalton, sıradan bir yazılım evi değil; donanım, gömülü yazılım ve bulut teknolojilerini birleştiren bir R&D (Ar-Ge) merkezi. Bu yüzden kariyer sayfası, "iş ilanı"ndan çok bir "meydan okuma" (challenge) gibi tınlamalıdır.
+
+Yetenekli mühendisleri çekmek için "Sınırları Zorlamak", "Gerçek Dünyaya Dokunmak" ve "Geleceği İnşa Etmek" temalarını işleyen, Sanity CMS yapısına uygun İngilizce içerik planı aşağıdadır.
+
+Part 1: Sanity CMS Content Structure (English)
+1. Module: Hero Section (The Hook)
+Headline: Shape the Future of Edge Intelligence
+
+Sub-headline: We don't just write code; we bridge the gap between physical signals and digital insights. Join the team building the nervous system of smart cities and industries.
+
+Primary Button: View Open Roles
+
+Visual Strategy: A candid, high-quality photo of two engineers (diverse) working together in a lab setting—one pointing at a screen with code, the other holding a SigMote board. Warm lighting, focused expressions.
+
+2. Module: Why Us? (Manifesto)
+Headline: Why Signalton?
+
+Body Text: At Signalton, we tackle the hardest problems in IoT: Latency, Bandwidth, and Privacy. We are a playground for the curious—where Digital Signal Processing meets Modern Web Tech, and where a line of code translates into real-world action.
+
+No Silos: Hardware engineers talk to Frontend devs. We believe innovation happens at the intersection.
+
+Tangible Impact: Your work won't be buried in a server. It will manage traffic, secure facilities, and optimize industries.
+
+3. Module: Culture & Values (3-Column Grid)
+Item 1:
+
+Icon: Microscope / Lightbulb
+
+Title: Relentless Curiosity
+
+Body: We love "impossible" challenges. We experiment, we fail fast, and we learn faster. R&D is in our DNA.
+
+Item 2:
+
+Icon: Circuit / Connections
+
+Title: Engineering Excellence
+
+Body: Whether it's a PCB layout or a React component, we obsess over quality, performance, and clean architecture.
+
+Item 3:
+
+Icon: Globe / People
+
+Title: Global Vision
+
+Body: Based in Turkey, building for the world. We adhere to global standards in everything we do.
+
+4. Module: Life at Signalton (Perks)
+Headline: Fuel for Your Best Work
+
+List of Perks:
+
+The Best Tools: High-end workstations, latest prototyping gear, and access to our hardware labs.
+
+Continuous Learning: Budget for courses, conferences, and certifications.
+
+Flexible Culture: We value output over hours. Hybrid working options available.
+
+Collaborative Environment: Regular tech talks, hackathons, and team retreats.
+
+5. Module: Open Positions (Dynamic List)
+Note: This section will pull dynamic data from your CMS "Job" documents.
+
+Placeholder Text:
+
+Senior Embedded Software Engineer (C/C++)
+
+Full Stack Developer (Next.js / Node.js)
+
+Hardware Design Engineer (PCB/Altium)
+
+Empty State Text: Don't see your role? We are always looking for exceptional talent.
+
+6. Module: Footer CTA (General Application)
+Headline: Create Your Own Role
+
+Body: Think you can make a difference but don't fit the boxes above? Send us your portfolio and tell us how you can contribute to the Signalton vision.
+
+Button: Pitch Us (mailto:careers@signalton.com.tr)
