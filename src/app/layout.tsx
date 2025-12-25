@@ -60,13 +60,19 @@ export default async function RootLayout({
 }>) {
   // Fetch navigation data
   let navItems: Array<{ _key: string; label: string; href: string; isExternal?: boolean }> = []
-  let settings: { siteName?: string; footer?: { copyright?: string; socialLinks?: Array<{ platform: string; url: string }> } } | null = null
+  interface SiteSettingsData {
+    siteName?: string
+    logo?: { asset: { _ref: string } }
+    footer?: { copyright?: string; socialLinks?: Array<{ platform: string; url: string }> }
+  }
+  let settings: SiteSettingsData | null = null
 
   try {
     const [navData, settingsData] = await Promise.all([
       client.fetch(navigationQuery),
-      client.fetch(siteSettingsQuery),
+      client.fetch(siteSettingsQuery) as Promise<SiteSettingsData>,
     ])
+    console.log('Sanity Settings Data:', JSON.stringify(settingsData, null, 2))
     navItems = navData?.items || []
     settings = settingsData
   } catch (error) {
@@ -86,7 +92,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-900 text-slate-100`}
       >
-        <Navbar items={navItems} siteName={settings?.siteName} />
+        <Navbar items={navItems} siteName={settings?.siteName} logo={settings?.logo} />
         <main>{children}</main>
         <Footer
           siteName={settings?.siteName}
