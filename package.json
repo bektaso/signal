@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "payload:init": "tsx scripts/create-admin.ts",
+    "payload:migrate": "tsx scripts/migrate-sanity-to-payload.ts"
   },
   "dependencies": {
     "@payloadcms/db-sqlite": "^3.72.0",
@@ -49,6 +51,7 @@
     "eslint-config-next": "16.1.1",
     "jsdom": "^27.3.0",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5",
     "vitest": "^4.0.16"
   }

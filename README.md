@@ -2,34 +2,38 @@
 
 ![Signalton Banner](https://via.placeholder.com/1200x630.png?text=Signalton+AI+Platform)
 
-**Signalton** is a cutting-edge corporate website and content management platform designed for a high-tech R&D company specializing in Digital Signal Processing (DSP), Edge AI, and IoT solutions.
+**Signalton** is a cutting-edge corporate website and unified content management platform designed for a high-tech R&D company specializing in Digital Signal Processing (DSP), Edge AI, and IoT solutions.
 
-This project is built with **Next.js 15+**, **Sanity.io v3**, **Tailwind CSS**, and **Framer Motion**, featuring a modern, responsive design, 3D visualizations, and an integrated AI assistant.
+This project is built with **Next.js 16**, **Payload CMS**, **Tailwind CSS**, and **Framer Motion**, featuring a modern, responsive design, 3D visualizations, and an integrated AI assistant.
 
 ---
 
 ## 🚀 Key Features
 
-*   **Dynamic Content Management (CMS):** Fully integrated with **Sanity.io** for managing products, services, career openings, and site-wide settings.
-*   **Next.js App Router:** Utilizing the latest React Server Components and server-side rendering for optimal performance and SEO.
-*   **Interactive UI/UX:** Smooth animations with **Framer Motion**, glassmorphism effects, and responsive layout.
+*   **Unified Content Management:** Self-hosted **Payload CMS** with powerful admin panel at `/admin` - no external dependencies.
+*   **Block-Based Content:** Flexible page builder with 6 content block types (Hero, Features, Products, Services, CTA, Contact).
+*   **Next.js 16 App Router:** Latest React Server Components, server-side rendering, and static generation for optimal performance.
+*   **Interactive UI/UX:** Smooth animations with **Framer Motion**, glassmorphism effects, and responsive dark-mode design.
 *   **AI Assistant:** Built-in AI Chat Agent (powered by OpenAI GPT-4) trained on Signalton's products and services.
-*   **Product Showcase:** Detailed product pages with rich text descriptions, technical specs, and galleries (SigMote, DataMote, SigCloud, Locomopt, SigSAS).
-*   **Careers Portal:** Dynamic job listings and company culture showcase.
-*   **SEO Optimized:** Automatic metadata generation from Sanity content.
+*   **Product Showcase:** Detailed product pages with rich text, technical specs, galleries, and related products.
+*   **Media Management:** Built-in image upload with automatic optimization and responsive sizing.
+*   **SEO Optimized:** Automatic metadata generation, sitemap, and Open Graph support.
+*   **TypeScript-First:** Full type safety across CMS schema, API, and frontend.
 
 ---
 
 ## 🛠 Tech Stack
 
-*   **Framework:** [Next.js 15](https://nextjs.org/) (React 19 RC)
+*   **Framework:** [Next.js 16](https://nextjs.org/) (React 19)
 *   **Language:** [TypeScript](https://www.typescriptlang.org/)
-*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-*   **CMS:** [Sanity.io](https://www.sanity.io/)
+*   **CMS:** [Payload CMS 3.x](https://payloadcms.com/) - Self-hosted, TypeScript-native
+*   **Database:** SQLite (development) / PostgreSQL/MongoDB (production)
+*   **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
 *   **Animations:** [Framer Motion](https://www.framer.com/motion/)
-*   **AI Integration:** [OpenAI API](https://openai.com/)
+*   **3D Graphics:** [Three.js](https://threejs.org/) + React Three Fiber
+*   **AI Integration:** [OpenAI API](https://openai.com/) (GPT-4)
 *   **Icons:** [Lucide React](https://lucide.dev/)
-*   **Deployment:** Vercel (Recommended)
+*   **Deployment:** Vercel / Netlify / Self-hosted
 
 ---
 
@@ -38,7 +42,7 @@ This project is built with **Next.js 15+**, **Sanity.io v3**, **Tailwind CSS**, 
 ### Prerequisites
 
 *   Node.js 18.17 or later
-*   npm or pnpm
+*   npm, pnpm, or yarn
 
 ### Installation
 
@@ -52,19 +56,26 @@ This project is built with **Next.js 15+**, **Sanity.io v3**, **Tailwind CSS**, 
 2.  **Install dependencies:**
 
     ```bash
-    npm install
+    npm install --legacy-peer-deps
     ```
 
 3.  **Environment Setup:**
 
-    Create a `.env.local` file in the root directory and add the following variables:
+    Create a `.env` file in the root directory and add the following variables:
 
     ```env
-    NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+    # Payload CMS
+    DATABASE_URI=./signal.db
+    PAYLOAD_SECRET=your-secret-key-here
+    NEXT_PUBLIC_SERVER_URL=http://localhost:3000
+
+    # OpenAI API
+    OPENAI_API_KEY=your_openai_api_key
+
+    # Sanity (legacy - optional during migration)
+    NEXT_PUBLIC_SANITY_PROJECT_ID=3i2rg51e
     NEXT_PUBLIC_SANITY_DATASET=production
     NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
-    NEXT_PUBLIC_SANITY_API_WRITE_TOKEN=your_write_token # For seeding scripts only
-    OPENAI_API_KEY=your_openai_api_key
     ```
 
 4.  **Run Development Server:**
@@ -73,19 +84,56 @@ This project is built with **Next.js 15+**, **Sanity.io v3**, **Tailwind CSS**, 
     npm run dev
     ```
 
-    Open [http://localhost:3000](http://localhost:3000) to view the site.
-    Open [http://localhost:3000/studio](http://localhost:3000/studio) to access the CMS.
+    - **Website:** [http://localhost:3000](http://localhost:3000)
+    - **Admin Panel:** [http://localhost:3000/admin](http://localhost:3000/admin)
+    - **API:** [http://localhost:3000/api](http://localhost:3000/api)
+
+5.  **Create First Admin User:**
+
+    On your first visit to `/admin`, you'll be prompted to create an admin account. Alternatively, use:
+
+    ```bash
+    npm run payload:init
+    ```
+
+    This creates a default admin user:
+    - Email: `admin@signalton.com`
+    - Password: `admin123456` (⚠️ Change immediately after first login!)
 
 ---
 
-## 📦 Data Seeding
+## 📦 Content Management
 
-To populate the CMS with initial product data (SigMote, DataMote, SigCloud, Locomopt, SigSAS):
+### Payload CMS Admin Panel
+
+Access the admin panel at [http://localhost:3000/admin](http://localhost:3000/admin) to:
+
+- ✏️ Create and edit Pages
+- 📦 Manage Products (SigMote, DataMote, SigCloud, Locomopt, SigSAS)
+- 🖼️ Upload and organize Media
+- 👥 Manage Users and Roles
+
+### Migration from Sanity (Optional)
+
+If you have existing data in Sanity, migrate it to Payload:
 
 ```bash
-# Ensure NEXT_PUBLIC_SANITY_API_WRITE_TOKEN is set in .env.local
-npx tsx scripts/seed-products.ts
-npx tsx scripts/seed-sigsas.ts
+npm run payload:migrate
+```
+
+This will:
+- Fetch all products and pages from Sanity
+- Import them into Payload CMS
+- Map relationships and references
+
+### Available Scripts
+
+```bash
+npm run dev              # Start development server
+npm run build            # Build for production
+npm run start            # Start production server
+npm run payload:init     # Create first admin user
+npm run payload:migrate  # Migrate data from Sanity to Payload
 ```
 
 ---
@@ -95,22 +143,47 @@ npx tsx scripts/seed-sigsas.ts
 ```
 signal/
 ├── src/
-│   ├── app/                # Next.js App Router pages
-│   │   ├── api/            # API routes (Chat, etc.)
-│   │   ├── careers/        # Careers page
-│   │   ├── products/       # Product dynamic pages
-│   │   └── studio/         # Sanity Studio route
-│   ├── components/         # React components
-│   │   ├── ai/             # Chat widget
-│   │   ├── blocks/         # CMS page blocks (Hero, Features, etc.)
-│   │   ├── layout/         # Navbar, Footer
-│   │   └── ui/             # Reusable UI elements (Button, Card, etc.)
+│   ├── app/                      # Next.js App Router
+│   │   ├── (payload)/            # Payload CMS routes
+│   │   │   ├── admin/            # Admin panel UI
+│   │   │   └── api/              # REST/GraphQL API
+│   │   ├── api/                  # Custom API routes
+│   │   │   ├── chat/             # OpenAI chatbot
+│   │   │   └── contact/          # Contact form
+│   │   ├── careers/              # Careers page
+│   │   ├── products/[slug]/      # Dynamic product pages
+│   │   ├── layout.tsx            # Root layout
+│   │   └── page.tsx              # Home page
+│   ├── components/               # React components
+│   │   ├── ai/                   # ChatWidget
+│   │   ├── blocks/               # CMS content blocks
+│   │   │   ├── BlockRenderer.tsx
+│   │   │   ├── HeroBlock.tsx
+│   │   │   ├── FeaturesBlock.tsx
+│   │   │   ├── ProductsBlock.tsx
+│   │   │   ├── ServicesBlock.tsx
+│   │   │   ├── CTABlock.tsx
+│   │   │   └── ContactBlock.tsx
+│   │   ├── layout/               # Navbar, Footer
+│   │   └── ui/                   # Reusable UI (Button, Card, etc.)
 │   ├── lib/
-│   │   └── sanity/         # Sanity client, queries, image builder
-│   └── sanity/
-│       └── schemas/        # Content types (Product, Page, SiteSettings...)
-├── scripts/                # Utility scripts (Seeding, migration)
-└── public/                 # Static assets
+│   │   ├── payload/              # Payload CMS client
+│   │   └── sanity/               # Sanity client (legacy fallback)
+│   ├── payload/                  # Payload CMS configuration
+│   │   ├── collections/          # Collection schemas
+│   │   │   ├── Users.ts
+│   │   │   ├── Pages.ts
+│   │   │   ├── Products.ts
+│   │   │   └── Media.ts
+│   │   └── blocks/               # Block definitions
+│   └── sanity/                   # Sanity schemas (legacy)
+├── payload.config.ts             # Payload CMS config
+├── scripts/                      # Utility scripts
+│   ├── create-admin.ts           # Admin user creation
+│   └── migrate-sanity-to-payload.ts  # Migration script
+├── public/
+│   └── media/                    # Uploaded media files
+└── signal.db                     # SQLite database (gitignored)
 ```
 
 ---
