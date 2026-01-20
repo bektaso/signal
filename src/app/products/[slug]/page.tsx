@@ -1,6 +1,11 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
+
+// Payload CMS (primary)
+import { getProductBySlug, getAllProducts } from '@/lib/payload/client'
+
+// Sanity CMS (fallback during migration)
 import { client } from '@/lib/sanity/client'
 import { productBySlugQuery, allProductsQuery } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/image'
@@ -75,6 +80,19 @@ function getIcon(iconName?: string): ComponentType<LucideProps> {
 
 export async function generateStaticParams() {
     try {
+        // Try Payload first
+        const payloadProducts = await getAllProducts()
+        if (payloadProducts && payloadProducts.length > 0) {
+            return payloadProducts.map((product: any) => ({
+                slug: product.slug,
+            }))
+        }
+    } catch (error) {
+        console.log('Payload not available for static params, trying Sanity...')
+    }
+
+    // Fallback to Sanity
+    try {
         const products = await client.fetch(allProductsQuery) as Array<{ slug: { current: string } }>
         return products.map((product) => ({
             slug: product.slug.current,
@@ -106,10 +124,29 @@ export default async function ProductPage({ params }: ProductPageProps) {
     const { slug } = await params
     let product: Product | null = null
 
+    // Try Payload first
     try {
-        product = await client.fetch(productBySlugQuery, { slug })
+        const payloadProduct = await getProductBySlug(slug)
+        if (payloadProduct) {
+            // Transform Payload format to expected Product format
+            product = {
+                ...payloadProduct,
+                slug: { current: payloadProduct.slug },
+            } as Product
+            console.log('✅ Loaded product from Payload CMS')
+        }
     } catch (error) {
-        console.error('Failed to fetch product:', error)
+        console.log('⚠️  Payload not available, trying Sanity fallback...')
+    }
+
+    // Fallback to Sanity
+    if (!product) {
+        try {
+            product = await client.fetch(productBySlugQuery, { slug })
+            console.log('✅ Loaded product from Sanity CMS (fallback)')
+        } catch (error) {
+            console.error('Failed to fetch product from both sources:', error)
+        }
     }
 
     if (!product) {

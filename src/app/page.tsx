@@ -1,5 +1,10 @@
+// Payload CMS (primary)
+import { getHomePage } from '@/lib/payload/client'
+
+// Sanity CMS (fallback during migration)
 import { client } from '@/lib/sanity/client'
 import { homePageQuery } from '@/lib/sanity/queries'
+
 import BlockRenderer from '@/components/blocks/BlockRenderer'
 import HeroWrapper from '@/components/hero/HeroWrapper'
 import FeaturesBlock from '@/components/blocks/FeaturesBlock'
@@ -70,12 +75,33 @@ const defaultBlocks = [
 ]
 
 export default async function HomePage() {
-  let pageData: { blocks?: Array<{ _key: string; _type: string;[key: string]: unknown }> } | null = null
+  let pageData: { blocks?: Array<{ _key?: string; blockType?: string; _type?: string; id?: string;[key: string]: unknown }> } | null = null
 
+  // Try Payload first (primary CMS)
   try {
-    pageData = await client.fetch(homePageQuery)
+    const payloadPage = await getHomePage()
+    if (payloadPage?.blocks) {
+      pageData = {
+        blocks: payloadPage.blocks.map((block: any) => ({
+          ...block,
+          _key: block.id || block._key,
+          _type: block.blockType || block._type,
+        }))
+      }
+      console.log('✅ Loaded page from Payload CMS')
+    }
   } catch (error) {
-    console.error('Failed to fetch home page:', error)
+    console.log('⚠️  Payload not available, trying Sanity fallback...')
+  }
+
+  // Fallback to Sanity if Payload fails
+  if (!pageData) {
+    try {
+      pageData = await client.fetch(homePageQuery)
+      console.log('✅ Loaded page from Sanity CMS (fallback)')
+    } catch (error) {
+      console.error('❌ Failed to fetch from both Payload and Sanity:', error)
+    }
   }
 
   const blocks = pageData?.blocks || defaultBlocks
@@ -83,7 +109,7 @@ export default async function HomePage() {
   return (
     <>
       {blocks.map((block) => (
-        <BlockRenderer key={block._key} block={block} />
+        <BlockRenderer key={block._key || block.id} block={block} />
       ))}
     </>
   )

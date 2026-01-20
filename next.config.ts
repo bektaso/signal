@@ -1,16 +1,23 @@
 import type { NextConfig } from "next";
+import { withPayload } from '@payloadcms/next/withPayload'
 
 const nextConfig: NextConfig = {
   // Enable React strict mode
   reactStrictMode: true,
 
-  // Image optimization for Sanity images
+  // Image optimization for Sanity images (keeping for migration period)
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
         pathname: '/images/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/media/**',
       },
     ],
   },
@@ -21,7 +28,7 @@ const nextConfig: NextConfig = {
     // ppr: true,
   },
 
-  // Transpile Sanity packages
+  // Transpile packages (Sanity + Payload)
   transpilePackages: ['sanity', '@sanity/vision'],
 
   // Environment variables exposed to client
@@ -29,7 +36,8 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
     NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
     NEXT_PUBLIC_SANITY_API_VERSION: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
+    NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
   },
 };
 
-export default nextConfig;
+export default withPayload(nextConfig);
