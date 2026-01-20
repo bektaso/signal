@@ -56,8 +56,11 @@ This project is built with **Next.js 16**, **Payload CMS**, **Tailwind CSS**, an
 2.  **Install dependencies:**
 
     ```bash
-    npm install --legacy-peer-deps
+    npm install
     ```
+
+    > **Note:** A `.npmrc` file is included to handle Payload CMS compatibility with Next.js 16.
+    > Payload officially supports Next.js 15.x but works with 16.x using legacy peer dependencies.
 
 3.  **Environment Setup:**
 
