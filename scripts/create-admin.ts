@@ -1,9 +1,11 @@
 import { getPayload } from 'payload'
 import config from '../payload.config'
 import dotenv from 'dotenv'
+import path from 'path'
 
-// Load environment variables
-dotenv.config()
+// Load environment variables from both .env and .env.local
+dotenv.config({ path: path.resolve(process.cwd(), '.env') })
+dotenv.config({ path: path.resolve(process.cwd(), '.env.local'), override: true })
 
 const createAdminUser = async () => {
   try {

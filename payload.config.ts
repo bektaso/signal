@@ -15,8 +15,6 @@ export default buildConfig({
     user: 'users',
     meta: {
       titleSuffix: '- Signalton CMS',
-      favicon: '/favicon.ico',
-      ogImage: '/og-image.jpg',
     },
   },
 
@@ -37,7 +35,15 @@ export default buildConfig({
   // Database adapter
   db: sqliteAdapter({
     client: {
-      url: process.env.DATABASE_URI || './signal.db',
+      url: (() => {
+        const dbPath = process.env.DATABASE_URI || './signal.db'
+        // If already a file:// URL, use as-is
+        if (dbPath.startsWith('file:')) {
+          return dbPath
+        }
+        // Add file: protocol for SQLite
+        return `file:${dbPath}`
+      })(),
     },
   }),
 

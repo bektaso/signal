@@ -1,10 +1,21 @@
-import { getPayload } from 'payload'
-import config from '../payload.config'
-import { client } from '../src/lib/sanity/client'
+// Load environment variables FIRST - before any other imports
 import dotenv from 'dotenv'
+import path from 'path'
 
-// Load environment variables
-dotenv.config()
+dotenv.config({ path: path.resolve(process.cwd(), '.env') })
+dotenv.config({ path: path.resolve(process.cwd(), '.env.local'), override: true })
+
+// Now import other modules after env is loaded
+import { getPayload } from 'payload'
+import { createClient } from '@sanity/client'
+
+// Create Sanity client after env is loaded
+const sanityClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-01-01',
+  useCdn: false,
+})
 
 interface SanityProduct {
   _id: string
@@ -61,13 +72,24 @@ const migrateSanityToPayload = async () => {
   try {
     console.log('🚀 Starting Sanity to Payload migration...\n')
 
+    // Verify Sanity config
+    console.log('📋 Sanity Configuration:')
+    console.log(`   Project ID: ${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}`)
+    console.log(`   Dataset: ${process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'}`)
+    console.log('')
+
+    if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
+      throw new Error('NEXT_PUBLIC_SANITY_PROJECT_ID is not set in environment variables')
+    }
+
     // Initialize Payload
+    const config = (await import('../payload.config')).default
     const payload = await getPayload({ config })
     console.log('✅ Payload initialized successfully!')
 
     // Fetch all products from Sanity
     console.log('\n📦 Fetching products from Sanity...')
-    const sanityProducts = await client.fetch<SanityProduct[]>(`
+    const sanityProducts = await sanityClient.fetch<SanityProduct[]>(`
       *[_type == "product"] | order(order asc) {
         _id,
         title,
@@ -104,6 +126,13 @@ const migrateSanityToPayload = async () => {
           ? JSON.stringify(sanityProduct.description)
           : undefined
 
+        // Prepare SEO data with proper constraints
+        const seoData = sanityProduct.seo ? {
+          metaTitle: sanityProduct.seo.metaTitle?.substring(0, 60),
+          metaDescription: sanityProduct.seo.metaDescription?.substring(0, 160),
+          // ogImage is an upload relation, skip for now
+        } : undefined
+
         const payloadProduct = await payload.create({
           collection: 'products',
           data: {
@@ -122,11 +151,11 @@ const migrateSanityToPayload = async () => {
             specifications: sanityProduct.specifications || [],
             useCases: sanityProduct.useCases || [],
             footerCta: sanityProduct.footerCta,
-            seo: sanityProduct.seo,
+            seo: seoData,
           },
         })
 
-        productIdMap.set(sanityProduct._id, payloadProduct.id)
+        productIdMap.set(sanityProduct._id, String(payloadProduct.id))
         console.log(`   ✓ Migrated: ${sanityProduct.title}`)
       } catch (error) {
         console.error(`   ✗ Failed to migrate ${sanityProduct.title}:`, error)
@@ -135,7 +164,7 @@ const migrateSanityToPayload = async () => {
 
     // Fetch home page from Sanity
     console.log('\n📄 Fetching home page from Sanity...')
-    const sanityHomePage = await client.fetch<SanityPage>(`
+    const sanityHomePage = await sanityClient.fetch<SanityPage>(`
       *[_type == "page" && slug.current == "home"][0] {
         _id,
         title,
