@@ -19,9 +19,22 @@ export const metadata: Metadata = {
 }
 
 // Server action wrapper for handleServerFunctions
+// Based on Payload 3.x + Next.js 16 compatibility work (PR #14456)
+// Config is passed via RootLayout, but we ensure it's available in server function
 async function serverFunction(args: Parameters<typeof handleServerFunctions>[0]) {
   'use server'
-  return handleServerFunctions(args)
+  
+  // In Payload 3.x, handleServerFunctions should get config from RootLayout
+  // But for Next.js 16 compatibility, we ensure config is available
+  try {
+    // Try standard call - config should come from RootLayout
+    return handleServerFunctions(args)
+  } catch (error) {
+    // Fallback: import config dynamically if needed
+    const payloadConfig = (await import('@payload-config')).default
+    // Some Payload versions might need config as second parameter
+    return handleServerFunctions(args, { config: payloadConfig } as any)
+  }
 }
 
 const Layout = ({ children }: Args) => (

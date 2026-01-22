@@ -1,2 +1,404 @@
-// Custom styles for Payload CMS admin panel
-// Add your customizations here
+// Signalton Admin Theme
+// Based on the main site's dark slate + cyan/blue accent palette
+
+// ============================================
+// COLOR VARIABLES - Signalton Brand
+// ============================================
+
+:root {
+  // Base backgrounds (dark slate tones)
+  --theme-bg: #0f172a;                    // Slate 900
+  --theme-elevation-0: #0f172a;           // Slate 900 - Main background
+  --theme-elevation-50: #131c31;          // Between 900-800
+  --theme-elevation-100: #1e293b;         // Slate 800
+  --theme-elevation-150: #283548;         // Between 800-700
+  --theme-elevation-200: #334155;         // Slate 700
+  --theme-elevation-250: #3d4c63;         // Between 700-600
+  --theme-elevation-300: #475569;         // Slate 600
+  --theme-elevation-350: #5a6981;         // Between 600-500
+  --theme-elevation-400: #64748b;         // Slate 500
+  --theme-elevation-450: #7c8ba0;         // Between 500-400
+  --theme-elevation-500: #94a3b8;         // Slate 400
+  --theme-elevation-550: #a8b5c7;         // Between 400-300
+  --theme-elevation-600: #cbd5e1;         // Slate 300
+  --theme-elevation-650: #dfe6ee;         // Light
+  --theme-elevation-700: #e2e8f0;         // Slate 200
+  --theme-elevation-750: #eef2f6;         // 
+  --theme-elevation-800: #f1f5f9;         // Slate 100
+  --theme-elevation-850: #f6f8fa;         //
+  --theme-elevation-900: #f8fafc;         // Slate 50
+  --theme-elevation-950: #ffffff;         // White
+  --theme-elevation-1000: #ffffff;        // White
+
+  // Primary accent (Cyan - Signalton's signature color)
+  --theme-success-100: #083344;
+  --theme-success-200: #0e4b5b;
+  --theme-success-300: #155e75;
+  --theme-success-400: #0891b2;
+  --theme-success-500: #06b6d4;           // Cyan 500 - Primary accent
+  --theme-success-600: #22d3ee;           // Cyan 400
+  --theme-success-650: #67e8f9;
+
+  // Error colors (Red)
+  --theme-error-100: #450a0a;
+  --theme-error-200: #7f1d1d;
+  --theme-error-300: #991b1b;
+  --theme-error-400: #dc2626;
+  --theme-error-500: #ef4444;
+  --theme-error-600: #f87171;
+  --theme-error-650: #fca5a5;
+
+  // Warning colors (Amber - Signalton's highlight)
+  --theme-warning-100: #451a03;
+  --theme-warning-200: #78350f;
+  --theme-warning-300: #b45309;
+  --theme-warning-400: #d97706;
+  --theme-warning-500: #f59e0b;           // Amber 500
+  --theme-warning-600: #fbbf24;           // Amber 400
+  --theme-warning-650: #fcd34d;
+
+  // Text colors
+  --theme-text: #f8fafc;                  // Slate 50 - Primary text
+  
+  // Input styling
+  --theme-input-bg: #1e293b;              // Slate 800
+}
+
+// ============================================
+// DARK THEME (Default)
+// ============================================
+
+[data-theme="dark"] {
+  // Background layers
+  --theme-bg: #0f172a;
+  --theme-elevation-0: #0f172a;
+  --theme-elevation-50: #131c31;
+  --theme-elevation-100: #1e293b;
+  --theme-elevation-150: #283548;
+  --theme-elevation-200: #334155;
+  --theme-elevation-250: #3d4c63;
+  --theme-elevation-300: #475569;
+  
+  // Text
+  --theme-text: #f8fafc;
+  
+  // Input
+  --theme-input-bg: #1e293b;
+}
+
+// ============================================
+// COMPONENT OVERRIDES
+// ============================================
+
+// Navigation sidebar
+.nav {
+  background: linear-gradient(180deg, #0f172a 0%, #131c31 100%) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+// Nav header (logo area)
+.nav-header {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1.25rem 1rem !important;
+  
+  // Logo text styling
+  .nav-header__label {
+    font-weight: 700 !important;
+    font-size: 1.25rem !important;
+    background: linear-gradient(135deg, #22d3ee, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+// Nav groups
+.nav-group {
+  &__toggle {
+    color: #94a3b8 !important;
+    font-size: 0.7rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    
+    &:hover {
+      color: #cbd5e1 !important;
+    }
+  }
+}
+
+// Nav links
+.nav-group__content .nav__link {
+  color: #cbd5e1 !important;
+  border-radius: 8px !important;
+  margin: 2px 8px !important;
+  padding: 0.625rem 1rem !important;
+  transition: all 0.2s ease !important;
+  
+  &:hover {
+    background: rgba(6, 182, 212, 0.1) !important;
+    color: #22d3ee !important;
+  }
+  
+  &.active {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.15)) !important;
+    color: #22d3ee !important;
+    font-weight: 500;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 60%;
+      background: linear-gradient(180deg, #22d3ee, #3b82f6);
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}
+
+// Main content area
+.template-default {
+  background: #0f172a !important;
+}
+
+// Cards and panels
+.card {
+  background: #1e293b !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
+}
+
+// Buttons
+.btn {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+  
+  &--style-primary {
+    background: linear-gradient(135deg, #06b6d4, #3b82f6) !important;
+    border: none !important;
+    color: #ffffff !important;
+    
+    &:hover {
+      background: linear-gradient(135deg, #22d3ee, #60a5fa) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3) !important;
+    }
+  }
+  
+  &--style-secondary {
+    background: #334155 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #f8fafc !important;
+    
+    &:hover {
+      background: #475569 !important;
+      border-color: rgba(255, 255, 255, 0.2) !important;
+    }
+  }
+}
+
+// Form inputs
+.field-type {
+  input,
+  textarea,
+  select {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+    border-radius: 8px !important;
+    color: #f8fafc !important;
+    transition: all 0.2s ease !important;
+    
+    &:focus {
+      border-color: #06b6d4 !important;
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15) !important;
+      outline: none !important;
+    }
+    
+    &::placeholder {
+      color: #64748b !important;
+    }
+  }
+}
+
+// Table styling
+.table {
+  background: #1e293b !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  
+  th {
+    background: #0f172a !important;
+    color: #94a3b8 !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #334155 !important;
+  }
+  
+  td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+  }
+  
+  tr:hover td {
+    background: rgba(6, 182, 212, 0.05) !important;
+  }
+}
+
+// Dashboard welcome
+.dashboard__wrap {
+  h1 {
+    background: linear-gradient(135deg, #22d3ee, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+  }
+}
+
+// Collection cards on dashboard
+.dashboard__card-list {
+  .card {
+    background: linear-gradient(145deg, #1e293b, #283548) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    
+    &:hover {
+      border-color: rgba(6, 182, 212, 0.3) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    h4 {
+      color: #f8fafc !important;
+    }
+  }
+}
+
+// Header/Top bar
+.app-header {
+  background: rgba(15, 23, 42, 0.8) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+// Pills/Tags
+.pill {
+  border-radius: 9999px !important;
+  font-weight: 500 !important;
+  
+  &--style-light-cyan {
+    background: rgba(6, 182, 212, 0.15) !important;
+    color: #22d3ee !important;
+  }
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+  
+  &:hover {
+    background: #475569;
+  }
+}
+
+// Selection
+::selection {
+  background: #06b6d4;
+  color: #0f172a;
+}
+
+// Login page styling
+.login {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%) !important;
+  
+  &__form {
+    background: rgba(30, 41, 59, 0.8) !important;
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+  }
+  
+  h1 {
+    background: linear-gradient(135deg, #22d3ee, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+// Stepnav / Breadcrumbs
+.step-nav {
+  a {
+    color: #94a3b8 !important;
+    
+    &:hover {
+      color: #22d3ee !important;
+    }
+  }
+  
+  .step-nav__last {
+    color: #f8fafc !important;
+  }
+}
+
+// Modal styling
+.modal__wrapper {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.modal__content {
+  background: #1e293b !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+}
+
+// Rich text editor
+.rich-text {
+  background: #1e293b !important;
+  border-radius: 12px !important;
+  border: 1px solid #334155 !important;
+  
+  &:focus-within {
+    border-color: #06b6d4 !important;
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15) !important;
+  }
+}
+
+// Toasts / Notifications
+.toast-container {
+  .toast {
+    background: #1e293b !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    
+    &--success {
+      border-left: 4px solid #06b6d4 !important;
+    }
+    
+    &--error {
+      border-left: 4px solid #ef4444 !important;
+    }
+    
+    &--warning {
+      border-left: 4px solid #f59e0b !important;
+    }
+  }
+}

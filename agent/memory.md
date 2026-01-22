@@ -102,6 +102,14 @@ Required `.env` file variables:
 | `graphql` module not found | Added `graphql` package to dependencies |
 | SQLite URL format error | Use `file:` protocol in DATABASE_URI |
 | `serverFunction` prop missing | Added server action wrapper in Payload layout |
+| Server function config import error | Using dynamic import in server function (temporary workaround until official Next.js 16 support) |
+
+## Next.js 16 Compatibility Status
+- **Payload PR #14456**: Official Next.js 16 compatibility work in progress
+- **Turbopack HMR**: Fixed in Next.js (issue #85883) - not affecting us (using Webpack)
+- **Current Status**: Using temporary workarounds for server function config imports
+- **Security**: CVSS 10.0 vulnerability makes Next.js 16 upgrade critical
+- **Recommendation**: Monitor Payload GitHub for official Next.js 16 support release
 
 ## Products
 The platform showcases the following products:

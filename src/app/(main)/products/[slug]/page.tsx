@@ -2,8 +2,11 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 
+// Force dynamic to avoid conflicts with admin operations
+export const dynamic = 'force-dynamic'
+
 // Payload CMS (primary)
-import { getProductBySlug, getAllProducts } from '@/lib/payload/client'
+import { getProductBySlug } from '@/lib/payload/client'
 
 // Sanity CMS (fallback during migration)
 import { client } from '@/lib/sanity/client'
@@ -78,29 +81,8 @@ function getIcon(iconName?: string): ComponentType<LucideProps> {
     return icons[pascalCase] || LucideIcons.Zap
 }
 
-export async function generateStaticParams() {
-    try {
-        // Try Payload first
-        const payloadProducts = await getAllProducts()
-        if (payloadProducts && payloadProducts.length > 0) {
-            return payloadProducts.map((product: any) => ({
-                slug: product.slug,
-            }))
-        }
-    } catch (error) {
-        console.log('Payload not available for static params, trying Sanity...')
-    }
-
-    // Fallback to Sanity
-    try {
-        const products = await client.fetch(allProductsQuery) as Array<{ slug: { current: string } }>
-        return products.map((product) => ({
-            slug: product.slug.current,
-        }))
-    } catch {
-        return []
-    }
-}
+// Note: generateStaticParams removed to prevent conflicts with admin operations
+// Products are rendered on-demand with force-dynamic
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
     const { slug } = await params

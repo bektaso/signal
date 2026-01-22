@@ -8,6 +8,7 @@ import { Pages } from './src/payload/collections/Pages'
 import { Products } from './src/payload/collections/Products'
 import { Users } from './src/payload/collections/Users'
 import { Media } from './src/payload/collections/Media'
+import { Careers } from './src/payload/collections/Careers'
 
 export default buildConfig({
   // Admin panel configuration
@@ -15,7 +16,15 @@ export default buildConfig({
     user: 'users',
     meta: {
       titleSuffix: '- Signalton CMS',
+      description: 'Signalton İçerik Yönetim Sistemi',
     },
+    components: {
+      graphics: {
+        // Logo görüntülenecek alan - ileride özel logo eklenebilir
+        // Logo: '/components/admin/Logo',
+      },
+    },
+    avatar: 'gravatar', // Kullanıcı avatarları için Gravatar
   },
 
   // Collections (content types)
@@ -23,6 +32,7 @@ export default buildConfig({
     Users,
     Pages,
     Products,
+    Careers,
     Media,
   ],
 
