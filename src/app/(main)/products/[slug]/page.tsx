@@ -8,10 +8,6 @@ export const dynamic = 'force-dynamic'
 // Payload CMS (primary)
 import { getProductBySlug } from '@/lib/payload/client'
 
-// Sanity CMS (fallback during migration)
-import { client } from '@/lib/sanity/client'
-import { productBySlugQuery, allProductsQuery } from '@/lib/sanity/queries'
-import { urlFor } from '@/lib/sanity/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Button from '@/components/ui/Button'
 import Card, { CardTitle, CardDescription } from '@/components/ui/Card'
@@ -32,6 +28,7 @@ interface GalleryImage {
     _key: string
     asset: { _ref: string }
     alt?: string
+    url?: string
 }
 
 interface Feature {
@@ -55,7 +52,7 @@ interface Product {
     tagline?: string
     heroHeadline?: string
     heroSubheadline?: string
-    heroImage?: { asset: { _ref: string } }
+    heroImage?: { asset: { _ref: string }; url?: string }
     primaryCta?: { label: string; href: string }
     secondaryCta?: { label: string; href: string }
     description?: Array<{ _type: string; _key: string;[key: string]: unknown }>
@@ -87,15 +84,16 @@ function getIcon(iconName?: string): ComponentType<LucideProps> {
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
     const { slug } = await params
     try {
-        const product = await client.fetch(productBySlugQuery, { slug }) as Product | null
-        if (!product) return { title: 'Product Not Found' }
+        const payloadProduct = await getProductBySlug(slug)
+        if (!payloadProduct) return { title: 'Product Not Found' }
+        const product = payloadProduct as unknown as Product
 
         return {
             title: product.seo?.metaTitle || product.title,
             description: product.seo?.metaDescription || product.tagline,
-            openGraph: product.seo?.ogImage?.asset ? {
-                images: [urlFor(product.seo.ogImage).width(1200).height(630).url()],
-            } : undefined,
+            // openGraph: product.seo?.ogImage?.asset ? {
+            //     images: [urlFor(product.seo.ogImage).width(1200).height(630).url()],
+            // } : undefined,
         }
     } catch {
         return { title: 'Product' }
@@ -114,21 +112,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
             product = {
                 ...payloadProduct,
                 slug: { current: payloadProduct.slug },
-            } as Product
+            } as unknown as Product
             console.log('✅ Loaded product from Payload CMS')
         }
     } catch (error) {
-        console.log('⚠️  Payload not available, trying Sanity fallback...')
-    }
-
-    // Fallback to Sanity
-    if (!product) {
-        try {
-            product = await client.fetch(productBySlugQuery, { slug })
-            console.log('✅ Loaded product from Sanity CMS (fallback)')
-        } catch (error) {
-            console.error('Failed to fetch product from both sources:', error)
-        }
+        console.log('⚠️  Payload not available', error)
     }
 
     if (!product) {
@@ -184,11 +172,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
                     </AnimatedSection>
 
                     {/* Hero Image */}
-                    {product.heroImage?.asset && (
+                    {product.heroImage?.url && (
                         <AnimatedSection delay={0.2}>
                             <div className="relative aspect-video rounded-2xl overflow-hidden glass">
                                 <Image
-                                    src={urlFor(product.heroImage).width(800).height(450).url()}
+                                    src={product.heroImage.url}
                                     alt={product.title}
                                     fill
                                     className="object-cover"
@@ -310,15 +298,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {product.gallery.map((image, index) => (
                                 <AnimatedSection key={image._key} delay={index * 0.1}>
-                                    <div className="relative aspect-video rounded-xl overflow-hidden glass group">
-                                        <Image
-                                            src={urlFor(image).width(600).height(400).url()}
-                                            alt={image.alt || `${product.title} image ${index + 1}`}
-                                            fill
-                                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                        />
-                                    </div>
+                                    {image.url && (
+                                        <div className="relative aspect-video rounded-xl overflow-hidden glass group">
+                                            <Image
+                                                src={image.url}
+                                                alt={image.alt || `${product?.title || 'Product'} image ${index + 1}`}
+                                                fill
+                                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                            />
+                                        </div>
+                                    )}
                                 </AnimatedSection>
                             ))}
                         </div>

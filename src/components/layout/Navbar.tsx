@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown, Cpu, Radio, Cloud, Map, Layers, Code } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { urlFor } from '@/lib/sanity/image'
+// import { urlFor } from '@/lib/sanity/image'
 
 interface NavItem {
     _key: string
@@ -18,7 +18,7 @@ interface NavItem {
 interface NavbarProps {
     items?: NavItem[]
     siteName?: string
-    logo?: { asset: { _ref: string } }
+    logo?: any // { asset: { _ref: string } }
 }
 
 // Default navigation items
@@ -80,10 +80,10 @@ export default function Navbar({ items, siteName = 'Signalton', logo }: NavbarPr
             <nav className="container mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 group">
-                    {logo?.asset ? (
+                    {logo?.url ? (
                         <div className="relative w-32 h-10">
                             <Image
-                                src={urlFor(logo).height(80).url()}
+                                src={logo.url}
                                 alt={siteName}
                                 fill
                                 className="object-contain object-left"

@@ -8,10 +8,6 @@ export const dynamic = 'force-dynamic'
 // Payload CMS (primary)
 import { getCareersPage } from '@/lib/payload/client'
 
-// Sanity CMS (fallback during migration)
-import { client } from '@/lib/sanity/client'
-import { urlFor } from '@/lib/sanity/image'
-
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Button from '@/components/ui/Button'
 import Card, { CardTitle, CardDescription } from '@/components/ui/Card'
@@ -19,7 +15,6 @@ import * as LucideIcons from 'lucide-react'
 import { ComponentType } from 'react'
 import type { LucideProps } from 'lucide-react'
 import type { Metadata } from 'next'
-import { groq } from 'next-sanity'
 
 // Icon helper
 function getIcon(iconName?: string): ComponentType<LucideProps> {
@@ -51,26 +46,6 @@ interface CareersData {
     seo?: { metaTitle?: string; metaDescription?: string }
 }
 
-// Sanity query (fallback)
-const careersQuery = groq`*[_type == "careers"][0]{
-  heroHeadline,
-  heroSubheadline,
-  heroImage,
-  heroCta,
-  whyUsHeadline,
-  whyUsBody,
-  whyUsPoints,
-  cultureHeadline,
-  cultureValues,
-  perksHeadline,
-  perks,
-  positionsHeadline,
-  positions,
-  emptyStateText,
-  footerCta,
-  seo
-}`
-
 export async function generateMetadata(): Promise<Metadata> {
     let data: CareersData | null = null
 
@@ -78,10 +53,7 @@ export async function generateMetadata(): Promise<Metadata> {
     try {
         data = await getCareersPage() as CareersData | null
     } catch {
-        // Fallback to Sanity
-        try {
-            data = await client.fetch(careersQuery)
-        } catch { }
+        // Ignore
     }
 
     return {
@@ -101,19 +73,7 @@ export default async function CareersPage() {
             console.log('✅ Loaded careers from Payload CMS')
         }
     } catch (error) {
-        console.log('⚠️  Payload not available for careers, trying Sanity...')
-    }
-
-    // Fallback to Sanity
-    if (!data) {
-        try {
-            data = await client.fetch(careersQuery)
-            if (data) {
-                console.log('✅ Loaded careers from Sanity CMS (fallback)')
-            }
-        } catch (error) {
-            console.error('❌ Failed to fetch careers from both CMS:', error)
-        }
+        console.error('❌ Failed to fetch careers from Payload CMS:', error)
     }
 
     // If no data from any CMS, show error
@@ -129,8 +89,6 @@ export default async function CareersPage() {
         if (!image) return null
         // Payload format
         if ('url' in image && image.url) return image.url
-        // Sanity format
-        if (image.asset?._ref) return urlFor(image).width(800).height(450).url()
         return null
     }
 

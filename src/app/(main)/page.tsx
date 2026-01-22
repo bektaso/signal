@@ -6,10 +6,6 @@ export const dynamic = 'force-dynamic'
 // Payload CMS (primary)
 import { getHomePage, getAllProducts } from '@/lib/payload/client'
 
-// Sanity CMS (fallback during migration)
-import { client } from '@/lib/sanity/client'
-import { homePageQuery } from '@/lib/sanity/queries'
-
 import BlockRenderer from '@/components/blocks/BlockRenderer'
 
 interface Block {
@@ -33,11 +29,11 @@ export default async function HomePage() {
     const payloadPage = await getHomePage()
     if (payloadPage?.blocks) {
       pageData = {
-        blocks: payloadPage.blocks.map((block: Block) => ({
+        blocks: (payloadPage.blocks as any[]).map((block: any) => ({
           ...block,
-          _key: block.id || block._key || String(Math.random()),
-          _type: block.blockType || block._type,
-        }))
+          _key: (block.id || block._key || String(Math.random())) as string,
+          _type: (block.blockType || block._type) as string,
+        })) as Block[]
       }
       console.log('✅ Loaded home page from Payload CMS')
     }
@@ -45,26 +41,14 @@ export default async function HomePage() {
     // Also fetch products for the products block
     const payloadProducts = await getAllProducts()
     if (payloadProducts?.length) {
-      products = payloadProducts.map((p: { id?: string; _id?: string; slug?: string; [key: string]: unknown }) => ({
+      products = (payloadProducts as any[]).map((p: any) => ({
         ...p,
         _id: p.id || p._id,
         slug: { current: p.slug },
       }))
     }
   } catch (error) {
-    console.log('⚠️  Payload not available, trying Sanity fallback...', error)
-  }
-
-  // Fallback to Sanity if Payload fails
-  if (!pageData) {
-    try {
-      pageData = await client.fetch(homePageQuery)
-      if (pageData) {
-        console.log('✅ Loaded home page from Sanity CMS (fallback)')
-      }
-    } catch (error) {
-      console.error('❌ Failed to fetch from both Payload and Sanity:', error)
-    }
+    console.log('⚠️  Payload not available', error)
   }
 
   // If no data from any CMS, show error
@@ -87,7 +71,7 @@ export default async function HomePage() {
   return (
     <>
       {blocks.map((block, index) => (
-        <BlockRenderer key={block._key || block.id || index} block={block} />
+        <BlockRenderer key={block._key || block.id || index} block={block as any} />
       ))}
     </>
   )

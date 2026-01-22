@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 // Config is passed via RootLayout, but we ensure it's available in server function
 async function serverFunction(args: Parameters<typeof handleServerFunctions>[0]) {
   'use server'
-  
+
   // In Payload 3.x, handleServerFunctions should get config from RootLayout
   // But for Next.js 16 compatibility, we ensure config is available
   try {
@@ -38,10 +38,10 @@ async function serverFunction(args: Parameters<typeof handleServerFunctions>[0])
 }
 
 const Layout = ({ children }: Args) => (
-  <RootLayout 
-    config={config} 
-    importMap={importMap} 
-    serverFunction={serverFunction}
+  <RootLayout
+    config={config}
+    importMap={importMap as any}
+    serverFunction={serverFunction as any}
     htmlProps={{ suppressHydrationWarning: true }}
   >
     {children}
