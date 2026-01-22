@@ -21,16 +21,20 @@ export async function getPayloadClient(): Promise<Payload | null> {
   try {
     // Dynamic import to avoid issues during certain build phases
     const { getPayload } = await import('payload')
+    console.log('📦 Importing Payload Config...')
     const configModule = await import('../../../payload.config')
     const config = configModule.default
 
     if (!config) {
+      console.error('❌ Payload Config is missing/null')
       return null
     }
 
+    console.log('✅ Payload Config loaded:', !!config)
     cachedPayload = await getPayload({ config })
     return cachedPayload
   } catch (error) {
+    console.error('❌ Error initializing Payload client:', error)
     // Return null silently - expected during admin operations
     return null
   }

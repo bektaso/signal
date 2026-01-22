@@ -25,21 +25,24 @@ interface ProductPageProps {
 }
 
 interface GalleryImage {
-    _key: string
+    id?: string
+    _key?: string
     asset: { _ref: string }
     alt?: string
     url?: string
 }
 
 interface Feature {
-    _key: string
+    id?: string
+    _key?: string
     icon?: string
     title: string
     description: string
 }
 
 interface UseCase {
-    _key: string
+    id?: string
+    _key?: string
     icon?: string
     title: string
     description: string
@@ -59,7 +62,7 @@ interface Product {
     icon?: string
     category?: string
     features?: Feature[]
-    specifications?: Array<{ _key: string; label: string; value: string }>
+    specifications?: Array<{ id?: string; _key?: string; label: string; value: string }>
     useCases?: UseCase[]
     gallery?: GalleryImage[]
     relatedProducts?: Array<{ _id: string; title: string; slug: { current: string }; tagline?: string }>
@@ -78,9 +81,6 @@ function getIcon(iconName?: string): ComponentType<LucideProps> {
     return icons[pascalCase] || LucideIcons.Zap
 }
 
-// Note: generateStaticParams removed to prevent conflicts with admin operations
-// Products are rendered on-demand with force-dynamic
-
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
     const { slug } = await params
     try {
@@ -91,9 +91,6 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
         return {
             title: product.seo?.metaTitle || product.title,
             description: product.seo?.metaDescription || product.tagline,
-            // openGraph: product.seo?.ogImage?.asset ? {
-            //     images: [urlFor(product.seo.ogImage).width(1200).height(630).url()],
-            // } : undefined,
         }
     } catch {
         return { title: 'Product' }
@@ -201,7 +198,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                         {product.features.map((feature, index) => {
                             const Icon = getIcon(feature.icon)
                             return (
-                                <AnimatedSection key={feature._key} delay={index * 0.1}>
+                                <AnimatedSection key={feature.id || feature._key || index} delay={index * 0.1}>
                                     <Card className="h-full text-center">
                                         <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center mx-auto mb-4">
                                             <Icon className="w-7 h-7 text-cyan-400" />
@@ -239,7 +236,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                                 <tbody>
                                     {product.specifications.map((spec, index) => (
                                         <tr
-                                            key={spec._key}
+                                            key={spec.id || spec._key || index}
                                             className={index % 2 === 0 ? 'bg-slate-800/30' : ''}
                                         >
                                             <td className="px-6 py-4 text-slate-400 font-medium w-1/3">
@@ -269,7 +266,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                         {product.useCases.map((useCase, index) => {
                             const Icon = getIcon(useCase.icon)
                             return (
-                                <AnimatedSection key={useCase._key} delay={index * 0.1}>
+                                <AnimatedSection key={useCase.id || useCase._key || index} delay={index * 0.1}>
                                     <div className="flex items-start gap-4 p-6 rounded-xl glass">
                                         <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
                                             <Icon className="w-5 h-5 text-amber-400" />
@@ -297,7 +294,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                         <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">Gallery</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {product.gallery.map((image, index) => (
-                                <AnimatedSection key={image._key} delay={index * 0.1}>
+                                <AnimatedSection key={image.id || image._key || index} delay={index * 0.1}>
                                     {image.url && (
                                         <div className="relative aspect-video rounded-xl overflow-hidden glass group">
                                             <Image
